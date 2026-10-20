@@ -1,0 +1,3 @@
+package com.shopsphere.controller;
+import jakarta.servlet.*; import jakarta.servlet.annotation.WebServlet; import jakarta.servlet.http.*; import java.io.*;
+@WebServlet(urlPatterns={"/admin","/admin/dashboard"}) public class AdminDashboardServlet extends HttpServlet{protected void doGet(HttpServletRequest r,HttpServletResponse p)throws ServletException,IOException{r.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(r,p);}}

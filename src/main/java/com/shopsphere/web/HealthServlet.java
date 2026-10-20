@@ -1,0 +1,3 @@
+package com.shopsphere.web;
+import com.shopsphere.config.DBConnection;import jakarta.servlet.annotation.WebServlet;import jakarta.servlet.http.*;import java.io.IOException;import java.sql.Connection;
+@WebServlet("/health") public class HealthServlet extends HttpServlet{protected void doGet(HttpServletRequest q,HttpServletResponse p)throws IOException{p.setContentType("application/json;charset=UTF-8");try(Connection c=DBConnection.getConnection()){boolean ok=c.isValid(2);p.setStatus(ok?200:503);p.getWriter().printf("{\"status\":\"%s\",\"database\":\"%s\"}",ok?"UP":"DEGRADED",ok?"UP":"DOWN");}catch(Exception e){p.setStatus(503);p.getWriter().print("{\"status\":\"DOWN\",\"database\":\"DOWN\"}");}}}

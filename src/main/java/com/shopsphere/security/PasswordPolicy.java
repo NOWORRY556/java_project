@@ -1,0 +1,2 @@
+package com.shopsphere.security;
+public final class PasswordPolicy{private PasswordPolicy(){}public static boolean isStrong(String p){if(p==null||p.length()<8||p.length()>128)return false;boolean u=false,l=false,d=false;for(char c:p.toCharArray()){u|=Character.isUpperCase(c);l|=Character.isLowerCase(c);d|=Character.isDigit(c);}return u&&l&&d;}public static void validate(String p){if(!isStrong(p))throw new IllegalArgumentException("Password must be 8-128 characters and include uppercase, lowercase and a digit.");}}

@@ -1,0 +1,5 @@
+package com.shopsphere.dao;
+import com.shopsphere.config.DBConnection; import java.sql.*;
+public class ReviewDAO{
+ public java.util.List<java.util.Map<String,Object>> findByProduct(int productId)throws SQLException{java.util.List<java.util.Map<String,Object>> out=new java.util.ArrayList<>();String q="SELECT r.rating,r.review_text,r.created_at,u.name FROM reviews r JOIN users u ON u.user_id=r.user_id WHERE r.product_id=? ORDER BY r.created_at DESC";try(Connection c=DBConnection.getConnection();PreparedStatement s=c.prepareStatement(q)){s.setInt(1,productId);try(ResultSet x=s.executeQuery()){while(x.next()){java.util.Map<String,Object> m=new java.util.LinkedHashMap<>();m.put("rating",x.getInt(1));m.put("reviewText",x.getString(2));m.put("createdAt",x.getTimestamp(3));m.put("name",x.getString(4));out.add(m);}}}return out;}
+public void add(int u,int p,int rating,String text)throws SQLException{try(Connection c=DBConnection.getConnection();PreparedStatement s=c.prepareStatement("INSERT INTO reviews(user_id,product_id,rating,review_text) VALUES(?,?,?,?)")){s.setInt(1,u);s.setInt(2,p);s.setInt(3,rating);s.setString(4,text);s.executeUpdate();}}}

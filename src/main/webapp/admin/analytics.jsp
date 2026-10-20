@@ -1,0 +1,3 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<html><head><title>Analytics</title></head><body><h1>ShopSphere Analytics</h1><p><a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></p><div><b>Users:</b> ${summary.users} &nbsp; <b>Products:</b> ${summary.products} &nbsp; <b>Orders:</b> ${summary.orders} &nbsp; <b>Revenue:</b> ${summary.revenue} &nbsp; <b>Reviews:</b> ${summary.reviews}</div><h2>Last 7 Order Days</h2><table border="1"><tr><th>Date</th><th>Orders</th><th>Revenue</th></tr><c:forEach var="d" items="${daily}"><tr><td>${d.day}</td><td>${d.orders}</td><td>${d.revenue}</td></tr></c:forEach></table></body></html>

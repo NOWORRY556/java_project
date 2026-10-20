@@ -1,0 +1,7 @@
+package com.shopsphere.service;
+import com.shopsphere.dao.UserDAO; import com.shopsphere.model.User; import com.shopsphere.util.PasswordUtil; import com.shopsphere.security.PasswordPolicy; import java.sql.SQLException;
+public class AuthService{
+ private final UserDAO dao=new UserDAO();
+ public boolean register(String n,String e,String p,String m)throws SQLException{if(n==null||n.isBlank())throw new IllegalArgumentException("Name is required.");if(e==null||e.isBlank())throw new IllegalArgumentException("Email is required.");e=e.trim().toLowerCase();if(dao.existsEmail(e))throw new IllegalArgumentException("Email is already registered. Please sign in.");PasswordPolicy.validate(p);User u=new User();u.setName(n.trim());u.setEmail(e);u.setPassword(PasswordUtil.hash(p));u.setMobile(m!=null?m.trim():null);return dao.create(u);}
+ public User login(String e,String p)throws SQLException{if(e==null||p==null)return null;User u=dao.findByEmail(e.trim().toLowerCase());if(u==null||!PasswordUtil.verify(p,u.getPassword()))return null;if(!u.isStatus())throw new IllegalArgumentException("Your account has been deactivated. Please contact support.");if(!u.getPassword().startsWith("PBKDF2$"))dao.updatePassword(u.getUserId(),PasswordUtil.hash(p));u.setPassword(null);return u;}
+}

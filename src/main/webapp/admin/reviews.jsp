@@ -1,0 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<html><head><title>Review Moderation</title></head><body><h1>Review Moderation</h1><p><a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></p><table border="1"><tr><th>ID</th><th>Product</th><th>Customer</th><th>Rating</th><th>Review</th><th>Created</th><th>Action</th></tr><c:forEach var="r" items="${reviews}"><tr><td>${r.reviewId}</td><td>${r.product}</td><td>${r.customer}</td><td>${r.rating}</td><td>${r.reviewText}</td><td>${r.createdAt}</td><td><form method="post" onsubmit="return confirm('Delete this review?');">
+    <input type="hidden" name="_csrf" value="${csrfToken}" /><input type="hidden" name="reviewId" value="${r.reviewId}"/><button type="submit">Delete</button></form></td></tr></c:forEach></table></body></html>

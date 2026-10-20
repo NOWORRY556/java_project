@@ -1,0 +1,3 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<html><head><title>Order Details</title></head><body><h1>Order #${order.orderId}</h1><p>Status: <b>${order.orderStatus}</b></p><p>Payment: ${order.paymentMethod} / ${order.paymentStatus}</p><p>Total: ${order.total} | Discount: ${order.discount}</p><p>Shipping: ${order.addressLine}, ${order.city}, ${order.state} - ${order.pincode}</p><h2>Items</h2><table border="1"><tr><th>Product</th><th>Qty</th><th>Unit Price</th></tr><c:forEach var="i" items="${items}"><tr><td>${i.name}</td><td>${i.quantity}</td><td>${i.unitPrice}</td></tr></c:forEach></table><p><a href="${pageContext.request.contextPath}/orders">Back to orders</a></p></body></html>

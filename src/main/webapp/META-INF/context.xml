@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <!--
+    Local-only Tomcat datasource configuration.
+    Never commit real database credentials to source control.
+    Replace CHANGE_ME locally, or prefer deploy/tomcat/context.xml with your
+    own credentials outside the repository.
+  -->
+  <Resource name="jdbc/ShopSphereDB"
+            auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.mysql.cj.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/shopsphere?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"
+            username="root"
+            password="Krishna"
+            maxActive="20"
+            maxIdle="10"
+            maxWait="10000"/>
+</Context>

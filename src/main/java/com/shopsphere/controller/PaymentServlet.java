@@ -1,0 +1,3 @@
+package com.shopsphere.controller;
+import com.shopsphere.dao.PaymentDAO; import jakarta.servlet.annotation.WebServlet; import jakarta.servlet.http.*; import java.io.*;
+@WebServlet("/payment") public class PaymentServlet extends HttpServlet{private final PaymentDAO dao=new PaymentDAO();protected void doPost(HttpServletRequest r,HttpServletResponse p)throws IOException{try{dao.create(Integer.parseInt(r.getParameter("orderId")),r.getParameter("method"),"LOCAL-"+System.currentTimeMillis(),Double.parseDouble(r.getParameter("amount")),"RECORDED");p.sendRedirect(r.getContextPath()+"/orders");}catch(Exception e){throw new IOException("Payment record failed",e);}}}
